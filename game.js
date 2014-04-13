@@ -1,5 +1,6 @@
-window.onload = function() {
-
+window.onclick = function() {
+	var div = document.getElementById("titlePage");
+	div.parentNode.removeChild(div);
 	var canvas = document.createElement('canvas'),
 	ctx = canvas.getContext('2d');
 	score = 0;
@@ -15,7 +16,7 @@ window.onload = function() {
 	}
 
 	canvas.width = 1200;
-	canvas.height = 550;
+	canvas.height = 535;
 
 	var body = document.getElementsByTagName('body')[0];
 	body.appendChild(canvas);
@@ -27,18 +28,11 @@ window.onload = function() {
 		this.play();
 		}, false);
 	mainMusic.play();
-	var mainAmbient = document.createElement('audio');
-	mainAmbient.setAttribute('src', 'ambient1.flac');
-	mainAmbient.addEventListener('ended', function() {
-		this.currentTime = 0;
-		this.play();
-		}, false);
-	mainAmbient.play();
-	
 
 	map = snakeGen(map);
 	map = foodGen(map);
 	drawGame();
+
 
 	window.addEventListener('keydown', function(e) {
     if (e.keyCode === 38 && direction !== 3) {
@@ -79,26 +73,26 @@ window.onload = function() {
 			if (snake[0].x < 0 ||
 				snake[0].x >= 120 ||
 				snake[0].y < 0 ||
-				snake[0].y >= 53) {
+				snake[0].y >= 51) {
 				loser();
 				return;
 			}
 
 			if (map[snake[0].x][snake[0].y] === 1) {
-				score += 100;
+				score += 5;
 				map = foodGen(map);
+				var eatNoise = document.createElement('audio');
+				eatNoise.setAttribute('src', 'replenish.ogg');
+				eatNoise.play();
 
 				for (var i = 0; i < 5; i++) {
 				snake.push({ x: snake[snake.length - 1].x, y: snake[snake.length - 1].y});
 				map[snake[snake.length - 1].x][snake[snake.length - 2].y] = 2;
+				
 				}
 
-				if ((score % 100) == 0) {
+				if ((score % 10) == 0) {
 				level += 1;
-
-				var eatNoise = document.createElement('audio');
-				eatNoise.setAttribute('src', 'replenish.ogg');
-				eatNoise.play();
 				}
 			}
 
@@ -160,7 +154,7 @@ window.onload = function() {
 	function foodGen(map)
 	{
 		var randX = Math.round(Math.random()*119),
-			randY = Math.round(Math.random()*53);
+			randY = Math.round(Math.random()*50);
 
 		while (map[randX][randY] === 2) {
 			randX = Math.round(Math.random()*19),
@@ -200,19 +194,19 @@ window.onload = function() {
 
 		ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-		ctx.fillStyle = 'black';
+		
 		ctx.font = '16px sans-serif';
 		ctx.fillStyle = 'white';
 
-		ctx.fillText('you lose', ((canvas.width / 2) - (ctx.measureText('you lose').width / 2)), 50);
-
-		ctx.font = '12px sans-serif white';
-
-		ctx.fillText('Score: ' + score, ((canvas.width /2 ) - (ctx.measureText('Score: ' + score).width /2 )), 70);
+		ctx.fillText('Final Points: ' + score, ((canvas.width /2 ) - (ctx.measureText('Final Points: ' + score).width /2 )), 70);
 
 		active = false;
 
-		
+
+	
+}	
+	function playAgain() {
+		active = true;
 
 	}
 
