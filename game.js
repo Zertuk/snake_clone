@@ -2,7 +2,6 @@ window.onclick = function() {
 	var div = document.getElementById("titlePage");
 	div.parentNode.removeChild(div);
 	var canvas = document.createElement('canvas'),
-	//adding music toggle
 	_musicToggle = document.getElementById('music-toggle'),
 	ctx = canvas.getContext('2d');
 	score = 0;
@@ -34,7 +33,6 @@ window.onclick = function() {
 		}
 	});
 
-
 	var mainMusic = document.createElement('audio');
 	mainMusic.setAttribute('src', 'snowfall.ogg');
 	mainMusic.addEventListener('ended', function() {
@@ -49,20 +47,10 @@ window.onclick = function() {
 			mainMusic.pause();
 		}
 	})
-	
-
-
-	
-	
-	
-
 
 	map = snakeGen(map);
 	map = foodGen(map);
 	drawGame();
-
-
-
 
 	window.addEventListener('keydown', function(e) {
     if (e.keyCode === 38 && direction !== 3) {
@@ -75,8 +63,6 @@ window.onclick = function() {
     direction = 0; // Right
     } 
     });
-   
-
 
 	function drawGame()
 	{
@@ -121,12 +107,9 @@ window.onclick = function() {
 				eatNoise.setAttribute('id', 'eatingNoise');
 				
 				if(_allMusic === true){
-					// The browser is reading that the toggle is true or false
-					// But the noise is not stopping when false
 					eatNoise.play();
 				}else {
 					eatNoise.pause();
-					//document.getElementById('eatingNoise').muted = true;
 				}
 
 				for (var i = 0; i < 5; i++) {
