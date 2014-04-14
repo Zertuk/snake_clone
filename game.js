@@ -9,6 +9,7 @@ window.onclick = function() {
 	snake = new Array(3);
 	active = true;
 	speed = 40;
+	total = 0;
 
 	var map = new Array(120);
 	for (var i = 0; i < map.length; i++) {
@@ -32,6 +33,8 @@ window.onclick = function() {
 	map = snakeGen(map);
 	map = foodGen(map);
 	drawGame();
+
+
 
 
 	window.addEventListener('keydown', function(e) {
@@ -80,6 +83,11 @@ window.onclick = function() {
 
 			if (map[snake[0].x][snake[0].y] === 1) {
 				score += 1;
+
+			if (total <= score) {
+				total = score;
+			}
+
 				map = foodGen(map);
 				var eatNoise = document.createElement('audio');
 				eatNoise.setAttribute('src', 'replenish.ogg');
@@ -150,6 +158,7 @@ window.onclick = function() {
 		ctx.fillStyle = 'white';
 		ctx.strokeRect(2, 20, canvas.width - 4, canvas.height - 24);
 		ctx.fillText('Points: ' + score, 2, 14);
+		ctx.fillText('Best: ' + total, 60, 14);
 	}
 
 	function foodGen(map)
@@ -199,9 +208,11 @@ window.onclick = function() {
 		ctx.font = '22px Oleo Script';
 		ctx.fillStyle = 'white';
 
-		ctx.fillText('You ate ' + score + ' pieces of food!  Click to play again!', ((canvas.width /2 ) - (ctx.measureText('Final Points: ' + score + 'pieces of food!  Click to play again!').width /2 )), 70);
 
+		ctx.fillText('You ate ' + score + ' pieces of food!  Click to play again!', ((canvas.width /2 ) - (ctx.measureText('Final Points: ' + score +total+ 'pieces of food!  Click to play again!').width /2 )), 70);
+		ctx.fillText('Your best score this round is ' + total, ((canvas.width/2) - (ctx.measureText('Your best score this round ccccccc' + total).width /2)), 100);
 		active = false;
+		
 		playAgain();
 		return;
 
@@ -227,6 +238,9 @@ window.onclick = function() {
 		level = 0;
 		direction = 0;
 		speed = 40;
+
+
+
 
 		}
 	}
