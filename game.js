@@ -24,6 +24,17 @@ window.onclick = function() {
 	var body = document.getElementsByTagName('body')[0];
 	body.appendChild(canvas);
 
+	var _allMusic = true;
+	_musicToggle.addEventListener('click', function(){
+		_musicToggle.classList.toggle('music-off');
+		if(_allMusic === true){
+			_allMusic = false;
+		} else {
+			_allMusic = true;
+		}
+	});
+
+
 	var mainMusic = document.createElement('audio');
 	mainMusic.setAttribute('src', 'snowfall.ogg');
 	mainMusic.addEventListener('ended', function() {
@@ -31,7 +42,18 @@ window.onclick = function() {
 		this.play();
 		}, false);
 	mainMusic.play();
+	_musicToggle.addEventListener('click', function(){
+		if(_allMusic === true){
+			mainMusic.play();
+		}else{
+			mainMusic.pause();
+		}
+	})
+	
 
+
+	
+	
 	
 
 
@@ -96,7 +118,13 @@ window.onclick = function() {
 				map = foodGen(map);
 				var eatNoise = document.createElement('audio');
 				eatNoise.setAttribute('src', 'replenish.ogg');
-				eatNoise.play();
+				_musicToggle.addEventListener(function(){
+					if(_allMusic === true){
+						eatNoise.play();
+					}else {
+						eatNoise();
+					}
+				});
 
 				for (var i = 0; i < 5; i++) {
 				snake.push({ x: snake[snake.length - 1].x, y: snake[snake.length - 1].y});
@@ -204,7 +232,11 @@ window.onclick = function() {
 	{
 		var gameOver = document.createElement('audio');
 		gameOver.setAttribute('src', 'applause.ogg');
-		gameOver.play();
+		if(_allMusic == true){
+			gameOver.play();
+		}else{
+			gameOver.pause();
+		}
 
 
 		ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -243,15 +275,7 @@ window.onclick = function() {
 		level = 0;
 		direction = 0;
 		speed = 40;
-
-
-
-
 		}
 
 	}
-	_musicToggle.addEventListener('click', function(){
-		_musicToggle.classList.toggle('music-off');
-		mainMusic.pause();
-	});
 };
