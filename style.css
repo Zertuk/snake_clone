@@ -25,7 +25,13 @@ canvas {
 	text-align: center;
 	font-size: 1.75em;
 	font-family: 'Oleo Script';
+}
 
-
+#music-toggle {
+    color: #fff;
+}
+.music-off {
+    text-decoration: line-through;
+    color: red !important; 
 }
 

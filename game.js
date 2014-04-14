@@ -2,6 +2,8 @@ window.onclick = function() {
 	var div = document.getElementById("titlePage");
 	div.parentNode.removeChild(div);
 	var canvas = document.createElement('canvas'),
+	//adding music toggle
+	_musicToggle = document.getElementById('music-toggle'),
 	ctx = canvas.getContext('2d');
 	score = 0;
 	level = 0;
@@ -29,6 +31,9 @@ window.onclick = function() {
 		this.play();
 		}, false);
 	mainMusic.play();
+
+	
+
 
 	map = snakeGen(map);
 	map = foodGen(map);
@@ -217,7 +222,7 @@ window.onclick = function() {
 		return;
 
 	
-}	
+	}	
 	function playAgain() {
 		window.onclick = function() {
 		
@@ -243,5 +248,10 @@ window.onclick = function() {
 
 
 		}
+
 	}
+	_musicToggle.addEventListener('click', function(){
+		_musicToggle.classList.toggle('music-off');
+		mainMusic.pause();
+	});
 };
