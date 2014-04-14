@@ -118,16 +118,16 @@ window.onclick = function() {
 				map = foodGen(map);
 				var eatNoise = document.createElement('audio');
 				eatNoise.setAttribute('src', 'replenish.ogg');
-				eatNoise.play();
-				_musicToggle.addEventListener('click', function(){
-					if(_allMusic === true){
-						// The browser is reading that the toggle is true or false
-						// But the noise is not stopping when false
-						eatNoise.play();
-					}else {
-						eatNoise.pause();
-					}
-				});
+				eatNoise.setAttribute('id', 'eatingNoise');
+				
+				if(_allMusic === true){
+					// The browser is reading that the toggle is true or false
+					// But the noise is not stopping when false
+					eatNoise.play();
+				}else {
+					eatNoise.pause();
+					//document.getElementById('eatingNoise').muted = true;
+				}
 
 				for (var i = 0; i < 5; i++) {
 				snake.push({ x: snake[snake.length - 1].x, y: snake[snake.length - 1].y});
