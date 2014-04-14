@@ -79,7 +79,7 @@ window.onclick = function() {
 			}
 
 			if (map[snake[0].x][snake[0].y] === 1) {
-				score += 5;
+				score += 1;
 				map = foodGen(map);
 				var eatNoise = document.createElement('audio');
 				eatNoise.setAttribute('src', 'replenish.ogg');
@@ -91,7 +91,7 @@ window.onclick = function() {
 				
 				}
 
-				if ((score % 10) == 0) {
+				if ((score % 2) == 0) {
 				level += 1;
 				}
 			}
@@ -145,6 +145,7 @@ window.onclick = function() {
 	function drawMain()
 	{
 		ctx.lineWidth = 2;
+		ctx.font = '14px Oleo Script';
 		ctx.strokeStyle = 'white';
 		ctx.fillStyle = 'white';
 		ctx.strokeRect(2, 20, canvas.width - 4, canvas.height - 24);
@@ -195,10 +196,10 @@ window.onclick = function() {
 		ctx.clearRect(0, 0, canvas.width, canvas.height);
 
 		
-		ctx.font = '16px sans-serif';
+		ctx.font = '22px Oleo Script';
 		ctx.fillStyle = 'white';
 
-		ctx.fillText('Final Points: ' + score + '  Click to play again!', ((canvas.width /2 ) - (ctx.measureText('Final Points: ' + score + '  Click to play again!').width /2 )), 70);
+		ctx.fillText('You ate ' + score + ' pieces of food!  Click to play again!', ((canvas.width /2 ) - (ctx.measureText('Final Points: ' + score + 'pieces of food!  Click to play again!').width /2 )), 70);
 
 		active = false;
 		playAgain();
@@ -215,9 +216,9 @@ window.onclick = function() {
 		snake.length = 3;
 		
 		map = Array(120);
-	for (var i = 0; i < map.length; i++) {
-		map[i] = new Array(120);
-	}
+		for (var i = 0; i < map.length; i++) {
+			map[i] = new Array(120);
+		}
 
 		map = snakeGen(map);
 		map = foodGen(map);
