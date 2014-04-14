@@ -198,16 +198,35 @@ window.onclick = function() {
 		ctx.font = '16px sans-serif';
 		ctx.fillStyle = 'white';
 
-		ctx.fillText('Final Points: ' + score, ((canvas.width /2 ) - (ctx.measureText('Final Points: ' + score).width /2 )), 70);
+		ctx.fillText('Final Points: ' + score + '  Click to play again!', ((canvas.width /2 ) - (ctx.measureText('Final Points: ' + score + '  Click to play again!').width /2 )), 70);
 
 		active = false;
-
+		playAgain();
+		return;
 
 	
 }	
 	function playAgain() {
-		active = true;
+		window.onclick = function() {
+		
 
+		ctx.clearRect(0, 0, canvas.width, canvas.height);
+		active = true;
+		snake.length = 3;
+		
+		map = Array(120);
+	for (var i = 0; i < map.length; i++) {
+		map[i] = new Array(120);
 	}
 
+		map = snakeGen(map);
+		map = foodGen(map);
+		drawGame();
+		score = 0;
+		level = 0;
+		direction = 0;
+		speed = 40;
+
+		}
+	}
 };
