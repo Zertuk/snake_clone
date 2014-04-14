@@ -118,11 +118,14 @@ window.onclick = function() {
 				map = foodGen(map);
 				var eatNoise = document.createElement('audio');
 				eatNoise.setAttribute('src', 'replenish.ogg');
-				_musicToggle.addEventListener(function(){
+				eatNoise.play();
+				_musicToggle.addEventListener('click', function(){
 					if(_allMusic === true){
+						// The browser is reading that the toggle is true or false
+						// But the noise is not stopping when false
 						eatNoise.play();
 					}else {
-						eatNoise();
+						eatNoise.pause();
 					}
 				});
 
